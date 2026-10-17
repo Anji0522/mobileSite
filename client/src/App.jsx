@@ -1,122 +1,234 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+
+// Context Providers
+import { ThemeProvider } from './context/ThemeContext.jsx';
+import { ToastProvider } from './context/ToastContext.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { CartProvider } from './context/CartContext.jsx';
+import { CompareProvider } from './context/CompareContext.jsx';
+
+// Layout & Route Guards
+import { MainLayout } from './layouts/MainLayout.jsx';
+import { ProtectedRoute, RoleRoute } from './routes/ProtectedRoute.jsx';
+
+// Public Pages
+import { HomePage } from './pages/HomePage.jsx';
+import { MobilesPage } from './pages/MobilesPage.jsx';
+import { MobileDetailPage } from './pages/MobileDetailPage.jsx';
+import { AccessoriesPage } from './pages/AccessoriesPage.jsx';
+import { AccessoryDetailPage } from './pages/AccessoryDetailPage.jsx';
+import { ComparePage } from './pages/ComparePage.jsx';
+import { BrandsPage } from './pages/BrandsPage.jsx';
+import { ServicesPage } from './pages/ServicesPage.jsx';
+import { ContactPage } from './pages/ContactPage.jsx';
+import { AboutPage } from './pages/AboutPage.jsx';
+import { NotFoundPage } from './pages/NotFoundPage.jsx';
+
+// Auth Pages
+import { LoginPage } from './pages/auth/LoginPage.jsx';
+import { RegisterPage } from './pages/auth/RegisterPage.jsx';
+import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage.jsx';
+import { ResetPasswordPage } from './pages/auth/ResetPasswordPage.jsx';
+
+// Customer Protected Pages
+import { CartPage } from './pages/CartPage.jsx';
+import { CheckoutPage } from './pages/CheckoutPage.jsx';
+import { OrdersPage } from './pages/OrdersPage.jsx';
+import { ProfilePage } from './pages/ProfilePage.jsx';
+import { BookingsPage } from './pages/BookingsPage.jsx';
+
+// Provider Protected Pages
+import { ProviderDashboardPage } from './pages/provider/ProviderDashboardPage.jsx';
+
+// Admin Protected Pages
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <HelmetProvider>
+      <ThemeProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <CartProvider>
+              <CompareProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route element={<MainLayout />}>
+                      {/* Public Storefront Routes */}
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/mobiles" element={<MobilesPage />} />
+                      <Route path="/mobiles/:slug" element={<MobileDetailPage />} />
+                      <Route path="/accessories" element={<AccessoriesPage />} />
+                      <Route path="/accessories/:slug" element={<AccessoryDetailPage />} />
+                      <Route path="/compare" element={<ComparePage />} />
+                      <Route path="/brands" element={<BrandsPage />} />
+                      <Route path="/brands/:brand" element={<BrandsPage />} />
+                      <Route path="/services" element={<ServicesPage />} />
+                      <Route path="/contact" element={<ContactPage />} />
+                      <Route path="/about" element={<AboutPage />} />
 
-      <div className="ticks"></div>
+                      {/* Authentication Routes */}
+                      <Route path="/login" element={<LoginPage />} />
+                      <Route path="/register" element={<RegisterPage />} />
+                      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                      <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+                      {/* Customer Routes (Protected) */}
+                      <Route
+                        path="/cart"
+                        element={
+                          <ProtectedRoute>
+                            <CartPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/checkout"
+                        element={
+                          <ProtectedRoute>
+                            <CheckoutPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/orders"
+                        element={
+                          <ProtectedRoute>
+                            <OrdersPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/orders/:id"
+                        element={
+                          <ProtectedRoute>
+                            <OrdersPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/profile"
+                        element={
+                          <ProtectedRoute>
+                            <ProfilePage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/bookings"
+                        element={
+                          <ProtectedRoute>
+                            <BookingsPage />
+                          </ProtectedRoute>
+                        }
+                      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+                      {/* Provider Routes (Protected - Role: provider, admin) */}
+                      <Route
+                        path="/provider/dashboard"
+                        element={
+                          <RoleRoute allowedRoles={['provider', 'admin']}>
+                            <ProviderDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/provider/services"
+                        element={
+                          <RoleRoute allowedRoles={['provider', 'admin']}>
+                            <ProviderDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/provider/products"
+                        element={
+                          <RoleRoute allowedRoles={['provider', 'admin']}>
+                            <ProviderDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/provider/orders"
+                        element={
+                          <RoleRoute allowedRoles={['provider', 'admin']}>
+                            <ProviderDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/provider/profile"
+                        element={
+                          <RoleRoute allowedRoles={['provider', 'admin']}>
+                            <ProviderDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+
+                      {/* Admin Routes (Protected - Role: admin) */}
+                      <Route
+                        path="/admin/dashboard"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/users"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/providers"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/catalogue"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/orders"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/price-sync"
+                        element={
+                          <RoleRoute allowedRoles={['admin']}>
+                            <AdminDashboardPage />
+                          </RoleRoute>
+                        }
+                      />
+
+                      {/* Fallback 404 Route */}
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
+              </CompareProvider>
+            </CartProvider>
+          </AuthProvider>
+        </ToastProvider>
+      </ThemeProvider>
+    </HelmetProvider>
+  );
 }
 
-export default App
+export default App;

@@ -8,7 +8,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed": "node src/seeds/seed.js",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand --detectOpenHandles --forceExit"
   },
   "keywords": ["mobiverse", "mern", "india", "ecommerce", "electronics"],
   "author": "MobiVerse India Team",

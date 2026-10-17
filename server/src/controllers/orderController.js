@@ -89,7 +89,10 @@ export const createOrder = asyncHandler(async (req, res, next) => {
       gst,
       grandTotal,
     },
-    shippingAddress,
+    shippingAddress: {
+      ...shippingAddress,
+      name: shippingAddress.name || shippingAddress.fullName || req.user.name || 'Customer',
+    },
     payment: {
       method: paymentMethod,
       status: paymentMethod === 'cod' ? 'pending' : 'pending',

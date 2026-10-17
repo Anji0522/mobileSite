@@ -12,6 +12,15 @@ const startServer = async () => {
     // 1. Connect to Database (with automatic Dev Memory Fallback)
     await connectDB();
 
+    // Auto-seed if database is empty
+    const { Mobile } = await import('./models/Mobile.js');
+    const mobileCount = await Mobile.countDocuments();
+    if (mobileCount === 0) {
+      console.log('📦 Database is empty. Running automatic seed...');
+      const { seedDatabase } = await import('./seeds/seed.js');
+      await seedDatabase();
+    }
+
     // 2. Start Scheduled Jobs
     initPriceSyncCron();
 
