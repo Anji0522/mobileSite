@@ -1,6 +1,6 @@
 # 📱 MobiVerse India — Shop On Your Fingertips
 
-[![MobiVerse India CI Pipeline](https://github.com/sidda/mobileSite/actions/workflows/ci.yml/badge.svg)](https://github.com/sidda/mobileSite/actions/workflows/ci.yml)
+[![MobiVerse India CI Pipeline](https://github.com/Anji0522/mobileSite/actions/workflows/ci.yml/badge.svg)](https://github.com/Anji0522/mobileSite/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-purple.svg)](https://vitejs.dev/)
@@ -11,7 +11,20 @@
 
 ---
 
+## 🌐 Live Demo & Deployment Links
+
+| Resource | Link |
+| :--- | :--- |
+| 🚀 **Live Production Demo** | **[https://mobiverse-india.surge.sh](https://mobiverse-india.surge.sh)** |
+| 🐙 **GitHub Repository** | **[https://github.com/Anji0522/mobileSite](https://github.com/Anji0522/mobileSite)** |
+| 📄 **System Architecture** | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| 📑 **API Documentation** | [`docs/API.md`](docs/API.md) |
+
+---
+
 ## 📑 Table of Contents
+
+- [Live Demo & Deployment Links](#-live-demo--deployment-links)
 
 - [System Architecture](#-system-architecture)
 - [Key Features by Role](#-key-features-by-role)
