@@ -1,6 +1,7 @@
 {
   "name": "mobiverse-india-server",
   "version": "1.0.0",
+  "type": "module",
   "description": "Backend API for MobiVerse India - One-stop marketplace for Indian mobiles & accessories",
   "main": "src/server.js",
   "scripts": {
